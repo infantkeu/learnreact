@@ -21,7 +21,7 @@ var rslt = (tx) => {
 };
 
 const promise = new Promise((resolve, reject) => {
-  throw new Error("Alarm");
+  //throw new Error("Alarm");
   if (true) {
     resolve("hello");
   } else {
@@ -29,7 +29,7 @@ const promise = new Promise((resolve, reject) => {
   }
 });
 
-//promise.then(data => rslt(data));
+promise.then((data) => rslt(data));
 promise.catch((error) => rslt("1111111222"));
 
 var test = () => {
