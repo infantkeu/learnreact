@@ -53,7 +53,16 @@ class MovieItem extends React.Component {
             this.setState({ show: true });
           }}
         >
-          {this.state.show === true ? <p>hide</p> : <p>show</p>}
+          show
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            console.log("show");
+            this.setState({ show: false });
+          }}
+        >
+          hide
         </button>
         {this.state.show === true ? <p>{overview}</p> : null}
       </div>
