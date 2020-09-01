@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles.css";
-
-var getMovie = (name, start) => name + " " + start;
+import { movieData } from "./MovieList";
 
 class SimpleDate {
   constructor(year, month, date) {
@@ -14,42 +13,43 @@ class SimpleDate {
   }
 }
 
-var txt = "test2";
+class App extends React.Component {
+  constructor() {
+    super();
 
-var rslt = (tx) => {
-  txt = tx;
-};
-
-const promise = new Promise((resolve, reject) => {
-  //throw new Error("Alarm");
-  if (true) {
-    resolve("hello");
-  } else {
-    reject();
+    this.state = {
+      movies: movieData
+    };
   }
-});
 
-promise.then((data) => rslt(data));
-promise.catch((error) => rslt("1111111222"));
-
-var test = () => {
-  var res = "";
-  var a1 = 3;
-  res = a1 + "_";
-  if (true) {
-    var a1 = 5;
-    res = res + a1 + "_";
+  removeMovie(movie) {
+    const updateMovies = this.state.movies.filter(function (item) {
+      return item.id !== movie.id;
+    });
+    this.setState({
+      movies: updateMovies
+    });
   }
-  res = res + a1;
-  return today.toString();
-};
 
-export default function App() {
-  return `${txt}`;
-  /* (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>      
-    </div> 
-  );*/
+  render() {
+    return (
+      <div>
+        {this.state.movies.map((movie) => {
+          return (
+            <div key={movie.id}>
+              <p>{movie.title}</p>
+              <button
+                type="button"
+                onClick={this.removeMovie.bind(this, movie)}
+              >
+                Del Movie
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 }
+
+export default App;
