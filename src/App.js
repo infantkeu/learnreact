@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import { movieData } from "./MovieList";
+import MovieItem from "./MovieItem";
 
 class SimpleDate {
   constructor(year, month, date) {
@@ -22,29 +23,25 @@ class App extends React.Component {
     };
   }
 
-  removeMovie(movie) {
+  removeMovie = (movie) => {
     const updateMovies = this.state.movies.filter(function (item) {
       return item.id !== movie.id;
     });
     this.setState({
       movies: updateMovies
     });
-  }
+  };
 
   render() {
     return (
       <div>
         {this.state.movies.map((movie) => {
           return (
-            <div key={movie.id}>
-              <p>{movie.title}</p>
-              <button
-                type="button"
-                onClick={this.removeMovie.bind(this, movie)}
-              >
-                Del Movie
-              </button>
-            </div>
+            <MovieItem
+              key={movie.id}
+              movie={movie}
+              removeMovie={this.removeMovie}
+            />
           );
         })}
       </div>
