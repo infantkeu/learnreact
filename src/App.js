@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import { movieData } from "./MovieList";
+import { moviesData } from "./MovieList";
 import MovieItem from "./MovieItem";
 
 class SimpleDate {
@@ -19,7 +19,8 @@ class App extends React.Component {
     super();
 
     this.state = {
-      movies: movieData
+      movies: moviesData,
+      moviesWillWatch: []
     };
   }
 
@@ -32,18 +33,37 @@ class App extends React.Component {
     });
   };
 
+  addMovieToWillWatch = (movie) => {
+    const updateMovies = [...this.state.moviesWillWatch, movie];
+    //    updateMovies.push(movie);
+    this.setState({
+      moviesWillWatch: updateMovies
+    });
+  };
+
   render() {
     return (
-      <div>
-        {this.state.movies.map((movie) => {
-          return (
-            <MovieItem
-              key={movie.id}
-              movie={movie}
-              removeMovie={this.removeMovie}
-            />
-          );
-        })}
+      <div classNmae="container">
+        <div className="row">
+          <div className="col-9">
+            <div className="row">
+              {this.state.movies.map((movie) => {
+                return (
+                  <div className="col-6 nb-4" key={movie.id}>
+                    <MovieItem
+                      movie={movie}
+                      removeMovie={this.removeMovie}
+                      addMovieToWillWatch={this.addMovieToWillWatch}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="col-3">
+            <p> Will Watch: {this.state.moviesWillWatch.length} </p>
+          </div>
+        </div>
       </div>
     );
   }
