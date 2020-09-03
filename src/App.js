@@ -33,6 +33,17 @@ class App extends React.Component {
     });
   };
 
+  removeMovieFromWillWatch = (movie) => {
+    const updateMoviesWillWatch = this.state.moviesWillWatch.filter(function (
+      item
+    ) {
+      return item.id !== movie.id;
+    });
+    this.setState({
+      moviesWillWatch: updateMoviesWillWatch
+    });
+  };
+
   addMovieToWillWatch = (movie) => {
     const updateMovies = [...this.state.moviesWillWatch, movie];
     //    updateMovies.push(movie);
@@ -43,7 +54,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div classNmae="container">
+      <div className="container">
         <div className="row">
           <div className="col-9">
             <div className="row">
@@ -54,6 +65,7 @@ class App extends React.Component {
                       movie={movie}
                       removeMovie={this.removeMovie}
                       addMovieToWillWatch={this.addMovieToWillWatch}
+                      removeMovieFromWillWatch={this.removeMovieFromWillWatch}
                     />
                   </div>
                 );
